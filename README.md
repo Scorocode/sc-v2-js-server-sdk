@@ -117,6 +117,26 @@ async function example() {
 example()
 ```
 
+- `acl` - сервис управления правами доступа
+
+```javascript
+const sc = require('@scorocode/server-sdk').default
+const app = sc.initApp({ ... })
+
+const acl = app.acl()
+
+async function example() {
+  // получить список ролей
+  const roles = await acl.getRoles()
+
+  // получить список объектов прав доступа для перечисленных ролей
+  // возвращается мэп { [roleName]: { ...aclObject } }
+  const acls = await acl.getAclsByRoles(['admin', 'customer'])
+}
+
+example()
+```
+
 - `fs` - сервис для работы с файлами
 
 ```javascript

@@ -1,5 +1,5 @@
 /* tslint:disable:no-magic-numbers */
-// import fs from 'fs'
+import fs from 'fs'
 import sc from '../../../index'
 
 beforeAll(() => sc.initApp())
@@ -11,51 +11,51 @@ afterAll(() => sc.destroyApp())
  */
 
 describe('Push integration tests', () => {
-  it('ff', () => {
+  // it('ff', () => {
+  //   expect(true).toBe(true)
+  // })
+
+  it('Should update FCM settings', async () => {
+    const stream = fs.createReadStream(`${__dirname}/android.json`)
+
+    await sc
+      .app()
+      .push()
+      .updateSettingsFCM(stream)
     expect(true).toBe(true)
   })
 
-  // it('Should update FCM settings', async () => {
-  //   const stream = fs.createReadStream(`${__dirname}/android.json`)
-  //
-  //   await sc
-  //     .app()
-  //     .push()
-  //     .updateSettingsFCM(stream)
-  //   expect(true).toBe(true)
-  // })
-  //
-  // it('Should update APN settings', async () => {
-  //   const stream = fs.createReadStream(`${__dirname}/ios.p12`)
-  //
-  //   await sc
-  //     .app()
-  //     .push()
-  //     .updateSettingsAPN(stream)
-  //   expect(true).toBe(true)
-  // })
+  it('Should update APN settings', async () => {
+    const stream = fs.createReadStream(`${__dirname}/ios.p12`)
 
-  // it('Should send FCM message', async () => {
-  //   const response = await sc
-  //     .app()
-  //     .push()
-  //     .sendFCM({
-  //       message: {
-  //         token:
-  //           'fSTGz4_Uxek:APA91bHfdjojzZuoh4Dszz8nL5wVm40FYYCoqW9rrJBLmV19oh_-kOFrbmZxVo5kP3hYbstMCtTWE7LDR9-tKx3hXUlHCSVeI7-2FiHqdZfCg7GekWlKLcVYOr2j_iuWa7REIYnklby9',
-  //         android: {
-  //           notification: {
-  //             body: 'body',
-  //             title: 'title2018-12-12T12:25:58+03:00',
-  //           },
-  //         },
-  //       },
-  //     })
-  //
-  //   expect(response).toMatchObject({
-  //     name: expect.any(String),
-  //   })
-  // })
+    await sc
+      .app()
+      .push()
+      .updateSettingsAPN(stream)
+    expect(true).toBe(true)
+  })
+
+  it('Should send FCM message', async () => {
+    const response = await sc
+      .app()
+      .push()
+      .sendFCM({
+        message: {
+          token:
+            'fSTGz4_Uxek:APA91bHfdjojzZuoh4Dszz8nL5wVm40FYYCoqW9rrJBLmV19oh_-kOFrbmZxVo5kP3hYbstMCtTWE7LDR9-tKx3hXUlHCSVeI7-2FiHqdZfCg7GekWlKLcVYOr2j_iuWa7REIYnklby9',
+          android: {
+            notification: {
+              body: 'body',
+              title: 'title2018-12-12T12:25:58+03:00',
+            },
+          },
+        },
+      })
+
+    expect(response).toMatchObject({
+      name: expect.any(String),
+    })
+  })
 
   // it('Should send APN message', async () => {
   //   const response = await sc

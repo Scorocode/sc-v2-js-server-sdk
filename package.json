@@ -20,7 +20,6 @@
     "cleanup": "shx rm -rf dist types coverage docs package",
     "prebuild": "npm run cleanup",
     "build": "gulp build",
-    "build:gulp": "rm -rf dist bundles && gulp build",
     "bridge": "sc-cli bridge -dir=app",
     "docs": "typedoc -p . --theme minimal --target 'es6' --excludeNotExported --excludePrivate --ignoreCompilerErrors --exclude \"**/src/**/__tests__/*.*\" --out docs src/",
     "test": "jest -c ./config/jest.config.js",
@@ -35,10 +34,9 @@
     "format:fix": "npm run format -- --write",
     "lint": "tslint --project tsconfig.json --format codeFrame",
     "lint:fix": "npm run lint -- --fix",
-    "_prerelease": "run-p -r bridge verify",
-    "release": "standard-version --dry-run",
-    "_postrelease": "npm run build && npm run release:github && npm run release:npm",
-    "postrelease": "npm run build",
+    "prerelease": "run-p -r bridge verify",
+    "release": "standard-version",
+    "postrelease": "npm run build && npm run release:github && npm run release:npm",
     "release:github": "git push --no-verify --follow-tags origin master",
     "release:npm": "npm publish",
     "release:preflight": "npm pack"
@@ -82,7 +80,7 @@
   },
   "dependencies": {
     "bson": "^3.0.2",
-    "grpc": "1.19.0",
+    "grpc": "1.21.1",
     "lodash": "4.17.10"
   },
   "devDependencies": {
@@ -100,7 +98,7 @@
     "cross-var": "1.1.0",
     "cz-conventional-changelog": "2.1.0",
     "download-file": "^0.1.5",
-    "google-protobuf": "3.6.1",
+    "google-protobuf": "3.8.0",
     "gulp": "^4.0.0",
     "gulp-clean": "0.4.0",
     "gulp-replace": "1.0.0",

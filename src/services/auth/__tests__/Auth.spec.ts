@@ -32,9 +32,9 @@ describe('Auth service integration tests', () => {
         .auth()
         .getUserByEmail(TEST_USER_EMAIL)
     ).rejects.toMatchObject({
-      httpCode: 404,
-      apiCode: 'not_found',
-      message: expect.stringMatching(/user not found/),
+      httpCode: 400,
+      apiCode: 'bad_request',
+      message: expect.stringMatching(/sql: no rows in result set/),
     })
   })
 
@@ -150,9 +150,9 @@ describe('Auth service integration tests', () => {
         .auth()
         .getUserById(user.id)
     ).rejects.toMatchObject({
-      httpCode: 404,
-      apiCode: 'not_found',
-      message: expect.stringMatching(/user not found/),
+      httpCode: 400,
+      apiCode: 'bad_request',
+      message: expect.stringMatching(/sql: no rows in result set/),
     })
   })
 })

@@ -4,27 +4,28 @@
 /* tslint:disable */
 
 import * as jspb from "google-protobuf";
+// "../github.com/gogo/protobuf/gogoproto/gogo_pb";
 import * as base_base_pb from "../base/base_pb";
+import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
+import * as sc_auth_common_pb from "../sc_auth/common_pb";
 
-export class Settings extends jspb.Message { 
-    getData(): Uint8Array | string;
-    getData_asU8(): Uint8Array;
-    getData_asB64(): string;
-    setData(value: Uint8Array | string): void;
+export class ByIdSelectRequest extends jspb.Message { 
+    getId(): number;
+    setId(value: number): void;
 
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): Settings.AsObject;
-    static toObject(includeInstance: boolean, msg: Settings): Settings.AsObject;
+    toObject(includeInstance?: boolean): ByIdSelectRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: ByIdSelectRequest): ByIdSelectRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: Settings, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): Settings;
-    static deserializeBinaryFromReader(message: Settings, reader: jspb.BinaryReader): Settings;
+    static serializeBinaryToWriter(message: ByIdSelectRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): ByIdSelectRequest;
+    static deserializeBinaryFromReader(message: ByIdSelectRequest, reader: jspb.BinaryReader): ByIdSelectRequest;
 }
 
-export namespace Settings {
+export namespace ByIdSelectRequest {
     export type AsObject = {
-        data: Uint8Array | string,
+        id: number,
     }
 }

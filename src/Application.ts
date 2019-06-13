@@ -1,5 +1,6 @@
 import extend from 'lodash/extend'
 import Scorocode from './Scorocode'
+import { Acl, AclConfig } from './services/acl'
 import { Auth, AuthConfig } from './services/auth'
 import { Client, ClientConfig } from './services/client'
 import { FS, FSConfig } from './services/fs'
@@ -13,6 +14,7 @@ import EventEmitter from './utils/EventEmitter'
 export interface ApplicationConfig {
   client?: ClientConfig
   auth?: AuthConfig
+  acl?: AclConfig
   pg?: PGConfig
   fs?: FSConfig
   ws?: WSConfig
@@ -46,6 +48,14 @@ export default class Application extends EventEmitter {
     this._checkIsAlive()
 
     return this.getService<Auth>('auth', Auth, config)
+  }
+
+  public acl(): Acl
+  public acl(config?: AclConfig): Promise<Acl>
+  public acl(config?: AclConfig) {
+    this._checkIsAlive()
+
+    return this.getService<Acl>('acl', Acl, config)
   }
 
   public client(): Client
