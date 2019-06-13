@@ -1,6 +1,6 @@
 {
   "name": "@scorocode/server-sdk",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Scorocode v2 JS Server SDK",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
