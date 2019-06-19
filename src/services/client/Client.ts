@@ -2,6 +2,7 @@ import Service, { ServiceConfig } from '../Service'
 
 import { eventEmitter } from '../../decorators'
 import { EventEmitterInterface } from '../../utils/EventEmitter'
+import AuthManagerService from './AuthManagerService'
 import AuthService from './AuthService'
 import FsService from './FsService'
 import LoggerService from './LoggerService'
@@ -13,6 +14,9 @@ import WsService from './WsService'
 
 export interface ClientConfig {
   auth?: {
+    address: string
+  }
+  authManager?: {
     address: string
   }
   pg?: {
@@ -36,6 +40,7 @@ export interface ClientConfig {
 export default class Client extends Service<ClientConfig & ServiceConfig>
   implements EventEmitterInterface {
   public readonly auth: AuthService
+  public readonly authManager: AuthManagerService
   public readonly pg: PgApiService
   public readonly pgManager: PgManagerService
   public readonly push: PushApiService
@@ -51,6 +56,13 @@ export default class Client extends Service<ClientConfig & ServiceConfig>
       config.auth || {
         address: `${process.env.SCAUTH_SERVICE_HOST}:${
           process.env.SCAUTH_SERVICE_PORT_GRPC
+        }`,
+      }
+    )
+    this.authManager = new AuthManagerService(
+      config.authManager || {
+        address: `${process.env.SCMANAGERAPI_SERVICE_HOST}:${
+          process.env.SCMANAGERAPI_SERVICE_PORT_GRPC
         }`,
       }
     )
