@@ -26,6 +26,7 @@ export interface IUser {
   isBlocked: boolean
   createdAt?: Date
   updatedAt?: Date
+  roles?: string[]
 }
 
 const createUser = (data: commonObjects.User): IUser => ({
@@ -285,10 +286,10 @@ export default class AuthService extends BaseService<ServiceClient> {
     const req = new commonObjects.UserSelectRequest()
     req.setData(payload.id)
 
-    return this.makeCall<commonObjects.UserSelectRequest, commonObjects.User>(
-      'deleteUserByID',
-      req
-    )
+    return this.makeCall<
+      commonObjects.UserSelectRequest,
+      google_protobuf_empty_pb.Empty
+    >('deleteUserByID', req)
   }
 
   getRoles(): Promise<IRole[]> {
