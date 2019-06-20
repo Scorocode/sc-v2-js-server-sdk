@@ -8,7 +8,7 @@ import * as mngObjects from './grpc/sc_auth/manager_pb'
 
 const DEFAULT_PAGE_SIZE = 20
 
-interface IEmptyResponse {}
+export interface IEmptyResponse {}
 
 interface IIdStringRequest {
   id: string
