@@ -4,6 +4,7 @@ import { eventEmitter } from '../../decorators'
 import { EventEmitterInterface } from '../../utils/EventEmitter'
 import AuthManagerService from './AuthManagerService'
 import AuthService from './AuthService'
+import BrokerService from './BrokerService'
 import FsService from './FsService'
 import LoggerService from './LoggerService'
 import PgApiService from './PgApiService'
@@ -34,6 +35,9 @@ export interface ClientConfig {
   pushManager?: {
     address: string
   }
+  broker?: {
+    address: string
+  }
 }
 
 @eventEmitter
@@ -48,6 +52,7 @@ export default class Client extends Service<ClientConfig & ServiceConfig>
   public readonly fs: FsService
   public readonly logger: LoggerService
   public readonly ws: WsService
+  public readonly broker: BrokerService
 
   constructor(config: ClientConfig & ServiceConfig) {
     super(config)
@@ -112,6 +117,13 @@ export default class Client extends Service<ClientConfig & ServiceConfig>
       config.fs || {
         address: `${process.env.SCWS_SERVICE_HOST}:${
           process.env.SCWS_SERVICE_PORT_GRPC
+        }`,
+      }
+    )
+    this.broker = new BrokerService(
+      config.fs || {
+        address: `${process.env.SCBROKERNODEMANAGER_SERVICE_HOST}:${
+          process.env.SCBROKERNODEMANAGER_SERVICE_PORT_GRPC
         }`,
       }
     )

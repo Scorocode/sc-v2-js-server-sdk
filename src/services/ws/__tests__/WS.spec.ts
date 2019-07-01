@@ -13,7 +13,11 @@ beforeEach(() => {
 
 afterEach(async () => {
   await sc.destroyApp()
-  ws.close()
+  try {
+    ws.close()
+  } catch (e) {
+    // nothing do
+  }
 })
 
 describe('WS integration tests', () => {
@@ -22,7 +26,7 @@ describe('WS integration tests', () => {
 
     ws.addEventListener('message', fn)
 
-    const delay = 500
+    const delay = 1000
     await new Promise((res) => setTimeout(res, delay))
 
     expect(fn).toHaveBeenCalledTimes(1)

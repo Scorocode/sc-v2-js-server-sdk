@@ -4,6 +4,7 @@ import { Acl, AclConfig } from './services/acl'
 import { Auth, AuthConfig } from './services/auth'
 import { Client, ClientConfig } from './services/client'
 import { FS, FSConfig } from './services/fs'
+import { Manager, ManagerConfig } from './services/manager'
 import { PG, PGConfig } from './services/pg'
 import { Push, PushConfig } from './services/push'
 import Service from './services/Service'
@@ -19,6 +20,7 @@ export interface ApplicationConfig {
   fs?: FSConfig
   ws?: WSConfig
   push?: PushConfig
+  manager?: ManagerConfig
 }
 
 const DEFAULT_APP_CONFIG: ApplicationConfig = {
@@ -96,6 +98,14 @@ export default class Application extends EventEmitter {
     this._checkIsAlive()
 
     return this.getService<Push>('push', Push, config)
+  }
+
+  public manager(): Manager
+  public manager(config?: ManagerConfig): Promise<Manager>
+  public manager(config?: ManagerConfig) {
+    this._checkIsAlive()
+
+    return this.getService<Manager>('manager', Manager, config)
   }
 
   get config(): ApplicationConfig {

@@ -1,5 +1,7 @@
 import sc from '../../../index'
+import AuthManagerService from '../AuthManagerService'
 import AuthService from '../AuthService'
+import BrokerService from '../BrokerService'
 import Client from '../Client'
 import FsService from '../FsService'
 import PgApiService from '../PgApiService'
@@ -21,9 +23,11 @@ describe('Client service integration test', () => {
     const client = sc.app().client()
 
     expect(client.auth).toBeInstanceOf(AuthService)
+    expect(client.authManager).toBeInstanceOf(AuthManagerService)
     expect(client.fs).toBeInstanceOf(FsService)
     expect(client.pg).toBeInstanceOf(PgApiService)
     expect(client.pgManager).toBeInstanceOf(PgManagerService)
     expect(client.ws).toBeInstanceOf(WsService)
+    expect(client.broker).toBeInstanceOf(BrokerService)
   })
 })
