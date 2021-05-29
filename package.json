@@ -124,6 +124,6 @@
     "typedoc": "0.11.1",
     "typescript": "2.9.1",
     "validate-commit-msg": "2.14.0",
-    "ws": "6.1.2"
+    "ws": "7.4.6"
   }
 }
